@@ -26,17 +26,21 @@
 
 ## Deskripsi Soal
 
-18. MUTEX/THREAD Math threading to calculate array size
+18. MUTEX/THREAD Math threading to calculate array size: 
 a. Terdapat dua variable global hardcoded yakni NUM_SIZE yang berupa angka besar yang nanti akan dipakai untuk kalkulasi dan NUM_THREADS yaitu jumlah thread yang diinginkan
 NUM_SIZE akan dibagi oleh jumlah thread yang dimana setiap thread akan menyimpan angka tersebut dan nantinya akan ditambahkan ulang.
+
 b. Apabila terjadi sebuah sisa saat pembagian, maka angka sisa tersebut akan ditambahkan kembali ke salah satu thread sehingga hasil sesuai dengan NUM_SIZE sebelumnya.
+
 c. Printkan setiap thread dan juga angka yang mereka miliki setelah pembagian dan juga tambahan dari sisa tadi.
+
 d. Print hasil dari semua angka dari setiap thread yang nantinya jumlahnya harus sama seperti NUM_SIZE awal.
 
 
 ### Catatan
 
-> Insert catatan dari pengerjaan kalian... (contoh dibawah) // hapus line ini
+> Untuk menjalankan file math threading bisa isi command dalam terminal yaitu: g++ -std=c++11 -o math_threading_with_mutex math_threading_with_mutex.cpp -pthread
+> lalu jalankan dengan ./math_threading_with_mutex
 
 Struktur repository:
 ```
