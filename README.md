@@ -73,7 +73,7 @@ Struktur repository:
 
 ### Video Demonstrasi
 
-[Akses Video dalam Assets](./assets/video_demo.mkv)
+[Akses Video dalam Assets](./assets/Video_demo.mkv)
 
 
 
