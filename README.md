@@ -161,7 +161,9 @@ https://github.com/user-attachments/assets/89488b9f-5809-4926-957f-9f11f9c99896
 
 
 ## Daftar Pustaka
+[1] B. Barney, "Introduction to Parallel Computing Tutorial," Lawrence Livermore National Laboratory.
 
+(Referensi Di bawah bisa dipakai asal mendesak)
 1. [https://en.cppreference.com/w/cpp/thread/thread](https://en.cppreference.com/w/cpp/thread/thread)
 2. [https://cplusplus.com/reference/mutex/mutex/](https://cplusplus.com/reference/mutex/mutex/)
 3. [https://www.geeksforgeeks.org/multithreading-in-cpp/](https://www.geeksforgeeks.org/multithreading-in-cpp/)
