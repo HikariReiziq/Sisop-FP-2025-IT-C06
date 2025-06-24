@@ -151,6 +151,36 @@ Ketika jumlah pekerjaan yang akan dilakukan setiap tugas sengaja bervariasi, ata
 
 Pada akhirnya, mungkin perlu untuk merancang algoritme yang mendeteksi dan menangani ketidakseimbangan beban saat terjadi secara dinamis dalam kode.
 
+### Crtitical Section dan Synchronization
+
+a) Critical Section
+
+*Critical section* adalah bagian dari program di mana proses atau thread mengakses sumber daya bersama (shared resource), seperti variabel global atau output terminal. Ketika dua atau lebih thread memasuki critical section secara bersamaan tanpa pengaturan, maka berpotensi terjadi data rusak, hasil yang salah, atau output tercampur(race condition).
+
+Contoh critical section pada code,
+
+    //Akses ke variabel global_sum
+    {
+    std::lock_guard<std::mutex> lock(sum_mutex);
+    global_sum += local_result;
+    }
+
+Bagian code ini adalah critical section karena semua thread mencoba menambahkan *local_result* ke *global_sum*. Jika tidak dilindungi, hasil akhirnya bisa salah akibat race condition.
+
+b) Synchronization
+
+*Synchronization* adalah teknik untuk mengontrol urutan eksekusi thread agar tidak terjadi konflik dalam critical section. Salah satu metode paling umum adalah penggunaan mutex untuk mengunci akses ke resource saat sedang digunakan oleh satu thread.
+
+Contoh Synchronization pada code,
+
+    //Akses ke std::cout
+    {
+    std::lock_guard<std::mutex> lock(cout_mutex);
+    std::cout << "Thread " << thread_id << "..." << std::endl;
+    }
+
+Di code ini, mutex _cout_mutex_ digunakan untuk mencegah hasil print antar thread saling bertabrakan. Dengan penggunaan _std::lock_guard<std::mutex>_, memastikan hanya satu thread yang bisa menjalankan bagian critical section pada satu waktu.
+
 ## Video Demonstrasi
 
 [Akses Video dalam Assets](./Assets/Video_Demo.mkv)
