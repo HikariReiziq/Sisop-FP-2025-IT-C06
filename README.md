@@ -283,9 +283,13 @@ https://github.com/user-attachments/assets/89488b9f-5809-4926-957f-9f11f9c99896
 
 ## Daftar Pustaka
 [1] B. Barney, "Introduction to Parallel Computing Tutorial," Lawrence Livermore National Laboratory.
+
 [2] Silberschatz, Galvin, Gagne. Operating System Concepts Essentials, 8th ed. Wiley. Chapter 6.2 – The Critical-Section Problem
+
 [3] Stallings, W. (2018). Operating Systems: Internals and Design Principles, 9th Edition. Pearson. Appendix A.1 - Race Conditions and Semaphores
+
 [4] Tanenbaum, A. S., & Bos, H. Modern Operating Systems, 4th ed. (Concurrency: Chapter 2.3–2.5).
+
 [5] K. Huang et al., “Access Adaptive and Thread‑Aware Cache Partitioning in Multicore Systems,” *Electronics*, vol. 7, no. 9, 2018.
 
 (Referensi Di bawah bisa dipakai asal mendesak)
