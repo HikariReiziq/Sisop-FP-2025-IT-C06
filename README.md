@@ -151,8 +151,6 @@ Ketika jumlah pekerjaan yang akan dilakukan setiap tugas sengaja bervariasi, ata
 
 Pada akhirnya, mungkin perlu untuk merancang algoritme yang mendeteksi dan menangani ketidakseimbangan beban saat terjadi secara dinamis dalam kode.
 
-[1] B. Barney, "Introduction to Parallel Computing Tutorial," Lawrence Livermore National Laboratory.
-
 ## Video Demonstrasi
 
 [Akses Video dalam Assets](./Assets/Video_Demo.mkv)
