@@ -97,9 +97,65 @@ g++ -std=c++11 -o math_threading math_threading.cpp -pthread
 │   └── Video_demo.mkv
 ```
 
+### Konsep Dasar Pembagian Kerja (Partitioning)
+
+Salah satu langkah pertama dalam merancang program paralel adalah memecah masalah menjadi "potongan" pekerjaan diskrit yang dapat didistribusikan ke beberapa tugas. Ini dikenal sebagai dekomposisi atau partisi. Ada dua cara dasar untuk membagi pekerjaan komputasi di antara tugas paralel: **dekomposisi domain** dan **dekomposisi fungsional**.
+
+- **Dekomposisi Domain (Domain Decomposition)**: Dalam jenis partisi ini, data yang terkait dengan masalah terurai. Setiap tugas paralel kemudian bekerja pada sebagian data. Contohnya adalah memproses array besar, di mana setiap thread diberi sebagian dari array tersebut untuk dihitung.
+
+![img1](./assets/domain_decomp.jpg)
+
+- **Dekomposisi Fungsional (Functional Decomposition)**: Dalam pendekatan ini, fokusnya adalah pada komputasi yang akan dilakukan daripada pada data yang dimanipulasi oleh komputasi. Masalahnya terurai sesuai dengan pekerjaan yang harus dilakukan. Setiap tugas kemudian melakukan sebagian dari keseluruhan pekerjaan. Misalnya, satu thread menangani I/O, sementara thread lain melakukan komputasi.
+
+![img2](./assets/functional_decomp.jpg)
+
+Kode yang kami berikan sebelumnya adalah contoh jelas dari **Dekomposisi Domain**, di mana domain angka dari `0` hingga `NUM_SIZE - 1` dibagi menjadi beberapa sub-rentang untuk setiap thread.
+
+### Alokasi Tugas (Load Balancing)
+
+*Load Balancing* mengacu pada praktik mendistribusikan jumlah pekerjaan yang kira-kira sama di antara tugas-tugas sehingga semua tugas tetap sibuk sepanjang waktu. Ini dapat dianggap sebagai minimalisasi waktu idle tugas. *Load Balancing* penting untuk program paralel karena alasan kinerja. Misalnya, jika semua tugas tunduk pada titik sinkronisasi penghalang, tugas paling lambat akan menentukan performa secara keseluruhan.
+
+**Cara Mencapai *Load Balancing***
+
+Untuk operasi array/matriks di mana setiap tugas melakukan pekerjaan yang sama, distribusikan kumpulan data secara merata di antara tugas. Untuk iterasi perulangan di mana pekerjaan yang dilakukan dalam setiap iterasi serupa, distribusikan iterasi secara merata di seluruh tugas.
+
+- **Alokasi Statis (Static Load Balancing)**: Beban kerja didistribusikan di antara thread **sebelum** eksekusi dimulai. Beban untuk setiap thread bersifat tetap. Metode ini efisien jika tugas-tugasnya seragam dan dapat diprediksi, seperti dalam kasus Anda.C++
+    
+    **Solusi Kode (Contoh Alokasi Statis dari Kode ):**
+    
+    ```cpp
+    // Bagian Kunci dari Alokasi Statis
+    // Beban kerja dihitung di awal sebelum thread melakukan tugas utama.
+    long long base_chunk_per_thread = NUM_SIZE / NUM_THREADS;
+    long long remainder = NUM_SIZE % NUM_THREADS;
+    long long current_start = 0;
+    
+    for (int i = 0; i < NUM_THREADS; ++i) {
+        long long chunk_size = base_chunk_per_thread;
+        if (i == NUM_THREADS - 1) {
+            chunk_size += remainder;
+        }
+        long long end_element = current_start + chunk_size;
+    
+        // Jatah (start_element, end_element) sudah final saat thread dibuat.
+        threads.emplace_back(worker_function, i, current_start, end_element);
+        current_start = end_element;
+    }
+    ```
+    
+- **Alokasi Dinamis (Dynamic Load Balancing)**: Beban kerja didistribusikan saat program berjalan. Biasanya, ada antrean tugas (*task pool*) di mana thread yang menganggur dapat mengambil pekerjaan baru. Ini lebih baik untuk tugas yang tidak dapat diprediksi tetapi memiliki overhead manajemen yang lebih tinggi.
+
+Ketika jumlah pekerjaan yang akan dilakukan setiap tugas sengaja bervariasi, atau tidak dapat diprediksi, mungkin akan membantu untuk menggunakan pendekatan ***kumpulan tugas penjadwal***. Saat setiap tugas menyelesaikan pekerjaannya, ia menerima bagian baru dari antrean kerja.
+
+![img3](./assets/schedulerTaskPool.jpg)
+
+Pada akhirnya, mungkin perlu untuk merancang algoritme yang mendeteksi dan menangani ketidakseimbangan beban saat terjadi secara dinamis dalam kode.
+
+[1] B. Barney, "Introduction to Parallel Computing Tutorial," Lawrence Livermore National Laboratory.
+
 ## Video Demonstrasi
 
-[Akses Video dalam Assets](./assets/Video_demo.mkv)
+[Akses Video dalam Assets](./assets/Video_Demo.mkv)
 
 https://github.com/user-attachments/assets/89488b9f-5809-4926-957f-9f11f9c99896
 
