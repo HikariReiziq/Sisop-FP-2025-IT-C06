@@ -103,11 +103,11 @@ Salah satu langkah pertama dalam merancang program paralel adalah memecah masala
 
 - **Dekomposisi Domain (Domain Decomposition)**: Dalam jenis partisi ini, data yang terkait dengan masalah terurai. Setiap tugas paralel kemudian bekerja pada sebagian data. Contohnya adalah memproses array besar, di mana setiap thread diberi sebagian dari array tersebut untuk dihitung.
 
-![img1](./assets/domain_decomp.jpg)
+![img1](./Assets/domain_decomp.jpg)
 
 - **Dekomposisi Fungsional (Functional Decomposition)**: Dalam pendekatan ini, fokusnya adalah pada komputasi yang akan dilakukan daripada pada data yang dimanipulasi oleh komputasi. Masalahnya terurai sesuai dengan pekerjaan yang harus dilakukan. Setiap tugas kemudian melakukan sebagian dari keseluruhan pekerjaan. Misalnya, satu thread menangani I/O, sementara thread lain melakukan komputasi.
 
-![img2](./assets/functional_decomp.jpg)
+![img2](./Assets/functional_decomp.jpg)
 
 Kode yang kami berikan sebelumnya adalah contoh jelas dari **Dekomposisi Domain**, di mana domain angka dari `0` hingga `NUM_SIZE - 1` dibagi menjadi beberapa sub-rentang untuk setiap thread.
 
@@ -147,7 +147,7 @@ Untuk operasi array/matriks di mana setiap tugas melakukan pekerjaan yang sama, 
 
 Ketika jumlah pekerjaan yang akan dilakukan setiap tugas sengaja bervariasi, atau tidak dapat diprediksi, mungkin akan membantu untuk menggunakan pendekatan ***kumpulan tugas penjadwal***. Saat setiap tugas menyelesaikan pekerjaannya, ia menerima bagian baru dari antrean kerja.
 
-![img3](./assets/schedulerTaskPool.jpg)
+![img3](./Assets/schedulerTaskPool.jpg)
 
 Pada akhirnya, mungkin perlu untuk merancang algoritme yang mendeteksi dan menangani ketidakseimbangan beban saat terjadi secara dinamis dalam kode.
 
@@ -155,7 +155,7 @@ Pada akhirnya, mungkin perlu untuk merancang algoritme yang mendeteksi dan menan
 
 ## Video Demonstrasi
 
-[Akses Video dalam Assets](./assets/Video_Demo.mkv)
+[Akses Video dalam Assets](./Assets/Video_Demo.mkv)
 
 https://github.com/user-attachments/assets/89488b9f-5809-4926-957f-9f11f9c99896
 
