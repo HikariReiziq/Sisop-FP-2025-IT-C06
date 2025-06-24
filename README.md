@@ -28,14 +28,15 @@
 
 18. MUTEX/THREAD Math threading to calculate array size:
     
-a. Terdapat dua variable global hardcoded yakni NUM_SIZE yang berupa angka besar yang nanti akan dipakai untuk kalkulasi dan NUM_THREADS yaitu jumlah thread yang diinginkan
-NUM_SIZE akan dibagi oleh jumlah thread yang dimana setiap thread akan menyimpan angka tersebut dan nantinya akan ditambahkan ulang.
+a. Terdapat dua variable global hardcoded yakni NUM_SIZE yang berupa angka besar yang nanti akan dipakai untuk kalkulasi dan NUM_THREADS yaitu jumlah thread yang diinginkan.
 
-b. Apabila terjadi sebuah sisa saat pembagian, maka angka sisa tersebut akan ditambahkan kembali ke salah satu thread sehingga hasil sesuai dengan NUM_SIZE sebelumnya.
+b. NUM_SIZE akan dibagi oleh jumlah thread yang dimana setiap thread akan menyimpan angka tersebut dan nantinya akan ditambahkan ulang.
 
-c. Printkan setiap thread dan juga angka yang mereka miliki setelah pembagian dan juga tambahan dari sisa tadi.
+c. Apabila terjadi sebuah sisa saat pembagian, maka angka sisa tersebut akan ditambahkan kembali ke salah satu thread sehingga hasil sesuai dengan NUM_SIZE sebelumnya.
 
-d. Print hasil dari semua angka dari setiap thread yang nantinya jumlahnya harus sama seperti NUM_SIZE awal.
+d. Printkan setiap thread dan juga angka yang mereka miliki setelah pembagian dan juga tambahan dari sisa tadi.
+
+e. Print hasil dari semua angka dari setiap thread yang nantinya jumlahnya harus sama seperti NUM_SIZE awal.
 
 
 ### Catatan
