@@ -199,6 +199,81 @@ Implementasi code untuk menghindari race condition,
 
 Di code ini, race condition bisa terjadi jika tidak disinkronkan. Variabel _global_sum_ digunakan bersama oleh semua thread. Jika dua atau lebih thread menjalankan _global_sum_ _+=_ _local_result_ secara bersamaan tanpa mutex, hasil akhirnya bisa tidak akurat karena proses membaca _global_sum_ bisa terjadi bersamaan atau nilai yang disimpan bisa menimpa hasil thread lain.
 
+### Thread-Aware Partitioning
+Thread-aware partitioning merupakan strategi pembagian sumber daya (seperti cache atau data) yang memperhatikan identitas dan kebutuhan spesifik dari setiap thread. Dalam arsitektur multithreaded, setiap thread memiliki beban kerja dan pola akses yang berbeda. Jika pembagian dilakukan tanpa memperhatikan ini, maka thread bisa saling mengganggu. Misalnya satu thread bisa mengusir (evict) data thread lain dari cache, mengakibatkan penurunan performa. Setiap thread diberi bagian data yang spesifik dan eksklusif, tanpa tumpang tindih agar tidak terjadi konflik antar thread, baik dalam pengolahan data maupun dalam penggunaan sumber daya.
+
+Contoh dalam kode:
+```cpp
+long long current_start = 0;
+
+    // Membuat dan menjalankan thread
+    for (int i = 0; i < NUM_THREADS; ++i) {
+        long long chunk_size = base_chunk_per_thread;
+        
+        // 3. Tambahkan sisa pembagian ke thread terakhir
+        if (i == NUM_THREADS - 1) {
+            chunk_size += remainder;
+        }
+
+        long long end_element = current_start + chunk_size;
+
+        // Membuat thread baru dan menjalankannya dengan worker_function
+        threads.emplace_back(worker_function, i, current_start, end_element);
+
+        // Update indeks awal untuk thread berikutnya
+        current_start = end_element;
+    }
+```
+* current_start dan end_element menentukan jangkauan data masing-masing thread
+* Setiap thread hanya memproses elemen dari start ke end - 1, yang tidak tumpang tindih dengan thread lain
+
+### Load Balancing dan Efisiensi
+Load balancing adalah prinsip penting dalam komputasi paralel yang bertujuan memastikan bahwa setiap thread bekerja dengan beban yang seimbang. Tanpa balancing, satu thread bisa selesai jauh lebih cepat daripada yang lain, menciptakan waktu idle yang membuang sumber daya CPU. Load balancing bertujuan agar setiap thread memiliki beban kerja yang merata. Bila NUM_SIZE tidak habis dibagi oleh NUM_THREADS, maka sisa dibagikan agar tidak ada thread yang idle lebih cepat.
+
+Contoh dalam kode:
+```cpp
+long long base_chunk_per_thread = NUM_SIZE / NUM_THREADS;
+    long long remainder = NUM_SIZE % NUM_THREADS;
+    
+    long long current_start = 0;
+
+    // Membuat dan menjalankan thread
+    for (int i = 0; i < NUM_THREADS; ++i) {
+        long long chunk_size = base_chunk_per_thread;
+        
+        // 3. Tambahkan sisa pembagian ke thread terakhir
+        if (i == NUM_THREADS - 1) {
+            chunk_size += remainder;
+        }
+```
+* base_chunk_per_thread memberikan jumlah elemen dasar ke setiap thread
+* remainder dialokasikan hanya ke thread terakhir agar total elemen tetap NUM_SIZE
+
+### Desain Sistem Paralel yang Terukur dan Efisien
+Sistem paralel modern, baik dalam perangkat keras maupun perangkat lunak, perlu dirancang secara terukur agar setiap thread atau task mendapat alokasi kerja yang sesuai. Dalam jurnal ini Huang et al. menjelaskan pentingnya adaptive allocation terhadap cache berdasarkan akses thread. Implementasi ini memastikan bahwa setiap thread memiliki batas awal dan akhir (start–end index) yang jelas, sehingga tidak tumpang tindih dan tidak ada data yang terlewat. Hal ini menjamin determinisme (konsistensi hasil) dan efisiensi eksekusi.
+
+Contoh dalam kode:
+```cpp
+{
+    std::lock_guard<std::mutex> lock(sum_mutex);
+    global_sum += local_result;
+}
+// --- Akhir Critical Section ---
+
+
+// --- Critical Section untuk Printing ---
+// Mengunci output agar tidak tercampur dengan thread lain.
+{
+    std::lock_guard<std::mutex> lock(cout_mutex);
+    // 4. Print setiap thread dan angka yang mereka miliki
+    // (end_element - 1) karena end_element bersifat eksklusif (tidak termasuk)
+    std::cout << "Thread " << thread_id << " (Elemen " << start_element << "-" << end_element - 1
+        << ") selesai. Hasil lokal: " << local_result << std::endl;
+}
+```
+* std::lock_guard<std::mutex> melindungi global_sum dan output terminal dari akses serentak, menjamin konsistensi hasil
+* Ini menunjukkan penerapan critical section dengan desain yang terukur dan aman dalam konteks threading
+
 ## Video Demonstrasi
 
 [Akses Video dalam Assets](./Assets/Video_Demo.mkv)
