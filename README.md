@@ -181,6 +181,24 @@ Contoh Synchronization pada code,
 
 Di code ini, mutex _cout_mutex_ digunakan untuk mencegah hasil print antar thread saling bertabrakan. Dengan penggunaan _std::lock_guard<std::mutex>_, memastikan hanya satu thread yang bisa menjalankan bagian critical section pada satu waktu.
 
+### Race Condition
+
+*Race condition* terjadi ketika dua atau lebih thread/proses mengakses dan merubah shared resource secara bersamaan, dan hasilnya program tergantung pada urutan eksekusi thread-thread tersebut.
+
+Dalam race condition, proses yang menang atau tereksekusi terlebih dahulu dapat memengaruhi hasil akhir, dan hal ini dapat menyebabkan hasil yang salah.
+
+Misalnya dua thread mencoba memperbarui variabel total:
+- Thread A membaca _total = 5_, lalu menambahkan 1 dan menyimpan _total = 6_
+- Thread B membaca _total = 5_, lalu menguranginya 1 dan menyimpan _total = 4_
+jika terjadi interleaving intruksi dan terjadi race condition, hasil akhir total bisa saja salah, misalnya menjadi 4 atau 6. Padahal, seharusnya penambahan dan pengurangan dalam kasus ini saling mengimbangi sehingga nilai akhir seharusnya tetap 5.
+
+Implementasi code untuk menghindari race condition,
+
+    std::lock_guard<std::mutex> lock(sum_mutex);
+    global_sum += local_result;
+
+Di code ini, race condition bisa terjadi jika tidak disinkronkan. Variabel _global_sum_ digunakan bersama oleh semua thread. Jika dua atau lebih thread menjalankan _global_sum_ _+=_ _local_result_ secara bersamaan tanpa mutex, hasil akhirnya bisa tidak akurat karena proses membaca _global_sum_ bisa terjadi bersamaan atau nilai yang disimpan bisa menimpa hasil thread lain.
+
 ## Video Demonstrasi
 
 [Akses Video dalam Assets](./Assets/Video_Demo.mkv)
