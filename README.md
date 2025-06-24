@@ -73,9 +73,9 @@ Struktur repository:
 
 ### Video Demonstrasi
 
-[Akses Video dalam Assets](./assets/video_demo.mvk)
+[Akses Video dalam Assets](./assets/video_demo.mkv)
 
-https://github.com/user-attachments/assets/1cfa66b1-b2f5-4e3e-a4b2-ec8b012f6fbb
+
 
 ## Daftar Pustaka
 
