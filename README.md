@@ -99,8 +99,9 @@ g++ -std=c++11 -o math_threading math_threading.cpp -pthread
 
 ## Video Demonstrasi
 
-[Klik untuk akses](./assets/Video_demo.mkv)
-[![Video Demo](https://img.youtube.com/vi/placeholder/0.jpg)](./Video_demo.mkv)
+[Akses Video dalam Assets](./assets/Video_demo.mkv)
+https://github.com/user-attachments/assets/89488b9f-5809-4926-957f-9f11f9c99896
+
 
 ## Daftar Pustaka
 
