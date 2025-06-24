@@ -39,10 +39,10 @@ d. Print hasil dari semua angka dari setiap thread yang nantinya jumlahnya harus
 
 
 ### Catatan
-
-> Untuk menjalankan file math threading bisa isi command dalam terminal yaitu: g++ -std=c++11 -o math_threading_with_mutex math_threading_with_mutex.cpp -pthread
-> lalu jalankan dengan ./math_threading_with_mutex
-
+Untuk mengcompile file math threading bisa isi command dalam terminal dengan yaitu: 
+`g++ -std=c++11 -o math_threading math_threading.cpp -pthread` 
+Selanjutnya, untuk menjalankan hasil compiler bisa menjalankan command berikut:
+`./math_threading`
 Struktur repository:
 ```
 .
@@ -71,8 +71,11 @@ Struktur repository:
 
 ...
 
-**Video Menjalankan Program**
-...
+### Video Demonstrasi
+
+[Akses Video dalam Assets](./assets/video_demo.mvk)
+
+https://github.com/user-attachments/assets/1cfa66b1-b2f5-4e3e-a4b2-ec8b012f6fbb
 
 ## Daftar Pustaka
 
