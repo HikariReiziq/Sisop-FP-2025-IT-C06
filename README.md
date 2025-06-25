@@ -88,7 +88,7 @@ g++ -std=c++11 -o math_threading math_threading.cpp -pthread
 .
 ├── math_threading.cpp
 ├── README.md
-├── assets/
+└── assets/
        └── Video_demo.mkv
        └── domain_decomp.jpg
        └── functional_decomp.jpg
