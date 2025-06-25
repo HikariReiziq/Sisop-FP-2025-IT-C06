@@ -1,22 +1,5 @@
 # Sisop-FP-2025-IT-C06
 
-# Final Project Sistem Operasi IT
-
-## Peraturan
-
-1. Waktu pengerjaan dimulai hari Kamis (19 Juni 2025) setelah soal dibagikan hingga hari Rabu (25 Juni 2025) pukul 23.59 WIB.
-2. Praktikan diharapkan membuat laporan penjelasan dan penyelesaian soal dalam bentuk Readme(github).
-3. Format nama repository github “Sisop-FP-2025-IT-\[Kelas]\[Kelompok]” (contoh\:Sisop-FP-2025-IT-A01).
-4. Setelah pengerjaan selesai, seluruh source code dan semua script bash, awk, dan file yang berisi cron job ditaruh di github masing - masing kelompok, dan link github dikumpulkan pada form yang disediakan. Pastikan github di setting ke publik.
-5. Commit terakhir maksimal 10 menit setelah waktu pengerjaan berakhir. Jika melewati maka akan dinilai berdasarkan commit terakhir.
-6. Jika tidak ada pengumuman perubahan soal oleh asisten, maka soal dianggap dapat diselesaikan.
-7. Jika ditemukan soal yang tidak dapat diselesaikan, harap menuliskannya pada Readme beserta permasalahan yang ditemukan.
-8. Praktikan tidak diperbolehkan menanyakan jawaban dari soal yang diberikan kepada asisten maupun praktikan dari kelompok lainnya.
-9. Jika ditemukan indikasi kecurangan dalam bentuk apapun di pengerjaan soal final project, maka nilai dianggap 0.
-10. Pengerjaan soal final project sesuai dengan modul yang telah diajarkan.
-
-## Kelompok C06
-
 ## Anggota Kelompok
 
 | Nama                         | NRP        |
@@ -94,7 +77,10 @@ g++ -std=c++11 -o math_threading math_threading.cpp -pthread
 ├── math_threading.cpp
 ├── README.md
 ├── assets/
-│   └── Video_demo.mkv
+       └── Video_demo.mkv
+       └── domain_decomp.jpg
+       └── functional_decomp.jpg
+       └── schedulerTaskPool.jpg
 ```
 
 ### Konsep Dasar Pembagian Kerja (Partitioning)
@@ -119,7 +105,7 @@ Kode yang kami berikan sebelumnya adalah contoh jelas dari **Dekomposisi Domain*
 
 Untuk operasi array/matriks di mana setiap tugas melakukan pekerjaan yang sama, distribusikan kumpulan data secara merata di antara tugas. Untuk iterasi perulangan di mana pekerjaan yang dilakukan dalam setiap iterasi serupa, distribusikan iterasi secara merata di seluruh tugas.
 
-- **Alokasi Statis (Static Load Balancing)**: Beban kerja didistribusikan di antara thread **sebelum** eksekusi dimulai. Beban untuk setiap thread bersifat tetap. Metode ini efisien jika tugas-tugasnya seragam dan dapat diprediksi, seperti dalam kasus Anda.C++
+- **Alokasi Statis (Static Load Balancing)**: Beban kerja didistribusikan di antara thread **sebelum** eksekusi dimulai. Beban untuk setiap thread bersifat tetap. Metode ini efisien jika tugas-tugasnya seragam dan dapat diprediksi, seperti dalam file math_thread.CPP kami
     
     **Solusi Kode (Contoh Alokasi Statis dari Kode ):**
     
@@ -292,7 +278,3 @@ https://github.com/user-attachments/assets/89488b9f-5809-4926-957f-9f11f9c99896
 
 [5] K. Huang et al., “Access Adaptive and Thread‑Aware Cache Partitioning in Multicore Systems,” *Electronics*, vol. 7, no. 9, 2018.
 
-(Referensi Di bawah bisa dipakai asal mendesak)
-1. [https://en.cppreference.com/w/cpp/thread/thread](https://en.cppreference.com/w/cpp/thread/thread)
-2. [https://cplusplus.com/reference/mutex/mutex/](https://cplusplus.com/reference/mutex/mutex/)
-3. [https://www.geeksforgeeks.org/multithreading-in-cpp/](https://www.geeksforgeeks.org/multithreading-in-cpp/)
