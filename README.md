@@ -280,7 +280,7 @@ https://github.com/user-attachments/assets/89488b9f-5809-4926-957f-9f11f9c99896
 
 
 ## Daftar Pustaka
-[1] Barney, B. (2025). Introduction to Parallel Computing Tutorial. Lawrence Livermore National Laboratory. pp. 20-21.
+[1] Barney, B. (2024). Introduction to Parallel Computing Tutorial. Lawrence Livermore National Laboratory. pp. 20-21.
 
 [2] Silberschatz, Galvin, Gagne. Operating System Concepts Essentials, 8th ed. Wiley. Chapter 6.2 – The Critical-Section Problem
 
